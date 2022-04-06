@@ -1,15 +1,13 @@
 import React from "react";
+import If from "./If";
 
 export default function(props){
-    if(props.hide){
-        return null
-    }
-    else{
     return(
-        <button className={'btn btn-'+props.style}
+       <If test={!props.hide}>
+            <button className={'btn btn-'+props.style}
             onClick={props.onClick}>
                 <i className={"fa fa-"+props.icon}></i>
-        </button>
+            </button>
+       </If>
     );
-}
 }
