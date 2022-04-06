@@ -16,6 +16,8 @@ export default class Todo extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleAdd = this.handleAdd.bind(this)
         this.handleRemove = this.handleRemove.bind(this)
+        this.handleDone = this.handleDone.bind(this)
+        this.handlePending = this.handlePending.bind(this)
         this.refresh()
     }
 
@@ -39,6 +41,16 @@ export default class Todo extends Component {
             .then(resp => this.refresh())
     }
 
+    handleDone(todo){
+        Axios.put(`${URL}/${todo._id}`, {...todo, done: true})
+            .then(resp => this.refresh())
+    }
+
+    handlePending(todo){
+        Axios.put(`${URL}/${todo._id}`, {...todo, done: false})
+            .then(resp => this.refresh())
+    }
+
     render(){
         return(
             <div>
@@ -46,7 +58,8 @@ export default class Todo extends Component {
                     <PageHeader name="Tarefas" small="Cadastro"/>
                     <TodoForm handleAdd={this.handleAdd} description={this.state.description}
                         handleChange={this.handleChange}/>
-                    <TodoList list={this.state.list} handleRemove={this.handleRemove}/>
+                    <TodoList list={this.state.list} handleRemove={this.handleRemove}
+                        handleDone={this.handleDone} handlePending={this.handlePending}/>
                 </h1>
             </div>
         );
