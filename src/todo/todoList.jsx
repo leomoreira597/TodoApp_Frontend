@@ -29,7 +29,7 @@ export default function(props){
                     <th>
                         Descrição
                     </th>
-                    <th>
+                    <th className="tableActions">
                         Ações
                     </th>
                 </tr>
